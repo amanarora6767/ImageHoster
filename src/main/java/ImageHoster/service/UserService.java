@@ -2,6 +2,8 @@ package ImageHoster.service;
 
 import ImageHoster.model.User;
 import ImageHoster.repository.UserRepository;
+import ImageHoster.utils.PasswordValidator;
+import jdk.nashorn.internal.runtime.regexp.RegExp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,11 @@ public class UserService {
         } else {
             return null;
         }
+    }
+
+    public boolean checkPassword(String password) {
+        PasswordValidator passwordValidator= new PasswordValidator();
+        return  passwordValidator.validate(password);
     }
 
 }
