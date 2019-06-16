@@ -1,5 +1,6 @@
 package ImageHoster.controller;
 
+import ImageHoster.model.Comment;
 import ImageHoster.model.Image;
 import ImageHoster.model.Tag;
 import ImageHoster.model.User;
@@ -50,6 +51,7 @@ public class ImageController {
         Image image = imageService.getImageById(id);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+        model.addAttribute("comments",image.getComment());
         return "images/image";
     }
 
@@ -98,6 +100,7 @@ public class ImageController {
         String tags = convertTagsToString(image.getTags());
         model.addAttribute("image", image);
         model.addAttribute("tags", tags);
+        model.addAttribute("comments",image.getComment());
             if(image!=null&&image.getUser().getId()==user.getId()) {
 
                 return "images/edit";
@@ -154,6 +157,7 @@ public class ImageController {
         String tags = convertTagsToString(image.getTags());
         model.addAttribute("image", image);
         model.addAttribute("tags", tags);
+        model.addAttribute("comments",image.getComment());
         if(image!=null&&image.getUser().getId()==user.getId()) {
             imageService.deleteImage(imageId);
             return "redirect:/images";
